@@ -8,7 +8,7 @@ describe('GitHub Actions', () => {
       .should('be.visible')
   })
 
-  it('Everything must work fine', () => {
+  it('Must failed', () => {
     cy.visit('http://localhost:4200')
       .get('[data-cy-container="application"]')
       .find('div.toolbar')
