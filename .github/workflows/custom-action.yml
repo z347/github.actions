@@ -1,0 +1,28 @@
+name: Learn github actions
+on: [push]
+jobs:
+  cypress-run-local:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress run mode
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm start
+
+      - name: Save screenshot on fail
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/reports/github/screenshots
+
+      - name: Save video
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/reports/github/videos
