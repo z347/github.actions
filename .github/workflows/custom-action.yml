@@ -13,16 +13,18 @@ jobs:
           build: npm run build
           start: npm start
 
-#      - name: Save screenshot on fail
-      - uses: actions/upload-artifact@v3
+      - name: Save screenshot on fail
+        uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/reports/github/screenshots
+          if-no-files-found: ignore
 
-#      - name: Save video
-      - uses: actions/upload-artifact@v3
+      - name: Save video
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: cypress-videos
           path: cypress/reports/github/videos
+          if-no-files-found: ignore
