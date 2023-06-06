@@ -1,31 +1,21 @@
 # GitHub documentation: https://docs.github.com/en/actions/quickstart
-# Cypress documentation: https://github.com/cypress-io/github-action
-
-# Youtube: https://www.youtube.com/watch?v=IEkRyElQ6VE&t=326s&ab_channel=glebbahmutov
+# Cypress documentation: https://docs.cypress.io/guides/continuous-integration/github-actions
+# Cypress snippets: https://github.com/cypress-io/github-action
 
 name: Learn github actions
-
 on: push
-
 jobs:
   cypress-run-local:
-
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node: [18.16.0]
-        npm: [9.5.1]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Cypress run mode at localhost
         uses: cypress-io/github-action@v5
         with:
           build: npm run build
           start: npm start
-
+          browser: chrome
       - name: Save screenshot on fail
         uses: actions/upload-artifact@v3
         if: failure()
@@ -33,7 +23,6 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore
-
       - name: Save video
         uses: actions/upload-artifact@v3
         if: always()
